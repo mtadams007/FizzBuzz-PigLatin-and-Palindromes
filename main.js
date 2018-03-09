@@ -47,7 +47,7 @@ let pigLatinator = (str) => {
       return str.substring(2,str.length - 1) + str[0] + str[1] + 'ay' + str[str.length -1];
     }
   } else if (isVowel(str[0]) === false) {
-      if (isLetter(str[-1]) === true){
+      if (isLetter(str[str.length - 1]) === true){
       return str.substring(1,str.length+1) + str[0] + 'ay';
     } else {
       return str.substring(1,str.length - 1) + str[0] + 'ay' + str[str.length - 1];
