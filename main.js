@@ -20,6 +20,28 @@ let fizzBuzz = () => {
 }
 fizzBuzz();
 
+// FizzBuzz II
+
+
+let FizzBuzz = (end) => {
+  let arr = [0,0,"Fizz", 0, "Buzz", "Fizz", 0,0,"Fizz", "Buzz", 0, "Fizz", 0, 0, "FizzBuzz"];
+  let m = 1;
+  while (m < end) {
+    for (let i = 0; i < 15 && m <= end; i++) {
+      if (arr[i] === 0) {
+        console.log(m);
+        m++;
+      } else {
+        console.log(arr[i]);
+        m++;
+      }
+
+    }
+  }
+}
+FizzBuzz(100);
+
+
 // #2 Write in Pig Latin
 
 
@@ -32,12 +54,8 @@ let pigLatinator = (str) => {
   let newString ='';
   if (isVowel(str[0]) === false && isVowelOrY(str[1])===false && isVowelOrY(str[2])===false) {
     if (isLetter(str[str.length-1]) === true){
-
-
       return str.substring(3,str.length) + str[0] + str[1] + str[2] + 'ay';
-
-    }else{
-
+    } else {
       return str.substring(3,str.length - 1) + str[0] + str[1] + str[2] + 'ay' + str[str.length -1];
     }
   } else if (isVowel(str[0]) === false && isVowelOrY(str[1])===false){
@@ -61,9 +79,6 @@ let pigLatinator = (str) => {
     }
   }
 }
-
-
-
 
 let isVowel = (letter) => {
   let vowels=['a','i','e','o','u','A','E','I','O','U'];
@@ -123,8 +138,6 @@ let findWords = (str) =>{
     }
   }return words;
 }
-
-
 
 let pigLatinator2 = (arr) => {
   let i = 0;
