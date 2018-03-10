@@ -47,7 +47,6 @@ FizzBuzz(100);
 
 let pigLatin = (str) => {
   return pigLatinator2(findWords(str));
-
 }
 
 // takes a single word and turns it into pig latin
@@ -56,40 +55,65 @@ let pigLatinator = (strn) => {
   let newString ='';
   // makes everything lowercase
   let str = strn.toLowerCase();
-  // checks if the first three letters are non vowels
-  if (isVowel(str[0]) === false && isVowelOrY(str[1])===false && isVowelOrY(str[2])===false) {
+  // checks if it is a number
+  if (isNumber(str) === true) {
+    return str;
+    ///checks if first three are consonants
+  } else if (isVowel(str[0]) === false && isVowelOrY(str[1])===false && isVowelOrY(str[2])===false) {
     // checks if it ends with punctuation
-    if (isLetter(str[str.length-1]) === true){
-      return str.substring(3,str.length) + str[0] + str[1] + str[2] + 'ay';
-    } else {
-      return str.substring(3,str.length - 1) + str[0] + str[1] + str[2] + 'ay' + str[str.length -1];
-    }
+    return punctuationChecker3(str);
     //checks if it starts with two non vowels
   } else if (isVowel(str[0]) === false && isVowelOrY(str[1])===false){
     //checks if it ends with punctuation
-    if (isLetter(str[str.length-1]) === true){
-      return str.substring(2,str.length) + str[0] + str[1] + 'ay';
-    } else {
-      return str.substring(2,str.length - 1) + str[0] + str[1] + 'ay' + str[str.length -1];
-    }
+    return punctuationChecker2(str);
     //checks if it starts with one consonant
   } else if (isVowel(str[0]) === false) {
     //punctuation check
-      if (isLetter(str[str.length - 1]) === true){
-      return str.substring(1,str.length+1) + str[0] + 'ay';
-    } else {
-      return str.substring(1,str.length - 1) + str[0] + 'ay' + str[str.length - 1];
-    }
-
+      return punctuationChecker1(str);
     } else {
       //starts with vowel and punctuation check
-        if (isLetter(str[str.length - 1]) === true){
-          return str + 'way';
-    } else {
-        return str.substring(0,str.length - 1) + 'way' + str[str.length -1];
-    }
+        return punctuationChecker(str);
+
   }
 }
+// let pigLatinator = (strn) => {
+//   let newString ='';
+//   // makes everything lowercase
+//   let str = strn.toLowerCase();
+//   // checks if the first three letters are non vowels
+//   if (isVowel(str[0]) === false && isVowelOrY(str[1])===false && isVowelOrY(str[2])===false) {
+//     // checks if it ends with punctuation
+//     if (isLetter(str[str.length-1]) === true){
+//       return str.substring(3,str.length) + str[0] + str[1] + str[2] + 'ay';
+//     } else {
+//       return str.substring(3,str.length - 1) + str[0] + str[1] + str[2] + 'ay' + str[str.length -1];
+//     }
+//     //checks if it starts with two non vowels
+//   } else if (isVowel(str[0]) === false && isVowelOrY(str[1])===false){
+//     //checks if it ends with punctuation
+//     if (isLetter(str[str.length-1]) === true){
+//       return str.substring(2,str.length) + str[0] + str[1] + 'ay';
+//     } else {
+//       return str.substring(2,str.length - 1) + str[0] + str[1] + 'ay' + str[str.length -1];
+//     }
+//     //checks if it starts with one consonant
+//   } else if (isVowel(str[0]) === false) {
+//     //punctuation check
+//       if (isLetter(str[str.length - 1]) === true){
+//       return str.substring(1,str.length+1) + str[0] + 'ay';
+//     } else {
+//       return str.substring(1,str.length - 1) + str[0] + 'ay' + str[str.length - 1];
+//     }
+//
+//     } else {
+//       //starts with vowel and punctuation check
+//         if (isLetter(str[str.length - 1]) === true){
+//           return str + 'way';
+//     } else {
+//         return str.substring(0,str.length - 1) + 'way' + str[str.length -1];
+//     }
+//   }
+// }
 
 // is it a vowel?
 let isVowel = (letter) => {
@@ -156,6 +180,56 @@ let findWords = (str) =>{
   }return words;
 }
 
+// check
+let punctuationChecker3 = (str) => {
+  let i = 1;
+  while (i < str.length) {
+    if (isLetter(str[i]) === false) {
+      return str.substring(3, i) + str[0] + str[1] + str[2] + 'ay' + str.substring(i, str.length);
+    } else {
+      i++;
+    }
+  }
+  return str.substring(3,str.length) + str[0] + str[1] + str[2] + 'ay';
+}
+
+let punctuationChecker2 = (str) => {
+  let i = 1;
+  while (i < str.length) {
+    if (isLetter(str[i]) === false) {
+     return str.substring(2, i) + str[0] + str[1] + 'ay' + str.substring(i, str.length);
+    } else {
+      i++;
+    }
+  }
+  return str.substring(2,str.length) + str[0] + str[1] + 'ay';
+}
+
+let punctuationChecker1 = (str) => {
+  let i = 1;
+  while (i < str.length) {
+    if (isLetter(str[i]) === false) {
+      return str.substring(1, i) + str[0] + 'ay' + str.substring(i, str.length);
+    } else {
+      i++;
+    }
+  }
+  return str.substring(1,str.length) + str[0] + 'ay';
+}
+
+let punctuationChecker = (str) => {
+  let i = 1;
+  while (i < str.length) {
+    if (isLetter(str[i]) === false) {
+      return str.substring(0, i) + 'way' + str.substring(i, str.length);
+    } else {
+      i++;
+    }
+  }
+  return str + 'way';
+}
+
+
 //takes an array and splits into a new string that is in pig Latin
 
 let pigLatinator2 = (arr) => {
@@ -173,7 +247,18 @@ let pigLatinator2 = (arr) => {
   return newString;
 }
 
-
+let isNumber = (str) => {
+  let numbers = ['0','1','2','3','4','5','6','7','8','9'];
+  let i = 0;
+  while (i < numbers.length) {
+    if (numbers[i] == str[0]){
+      return true;
+    } else {
+      i++;
+    }
+  }
+  return false;
+}
 
 // # 3 palindromes
 
@@ -195,21 +280,21 @@ function reverse(strng){
 // Palindrome solution stolen from danielle
 
 // if text is single letter, return false
-if(text.length == 1) {
-    return false;
-}
-
-let endPointer = text.length - 1;
-// iterate through string, 'i' will act as start pointer
-for (let i = 0; i < text.length; i++) {
-    // if start pointer doesn't match end pointer, return false
-    if (text[i] != text[endPointer]) {
-        return false;
-    }
-    // shift endPointer
-    endPointer--;
-}
-
-// string is palindrome, return true
-return true;
-}
+// if(text.length == 1) {
+//     return false;
+// }
+//
+// let endPointer = text.length - 1;
+// // iterate through string, 'i' will act as start pointer
+// for (let i = 0; i < text.length; i++) {
+//     // if start pointer doesn't match end pointer, return false
+//     if (text[i] != text[endPointer]) {
+//         return false;
+//     }
+//     // shift endPointer
+//     endPointer--;
+// }
+//
+// // string is palindrome, return true
+// return true;
+// }
